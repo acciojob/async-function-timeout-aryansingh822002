@@ -1,39 +1,30 @@
-//your JS code here. If required.
 // Select DOM elements
 const textInput = document.getElementById("text");
 const delayInput = document.getElementById("delay");
 const submitBtn = document.getElementById("btn");
 const outputDiv = document.getElementById("output");
 
-// Utility function to wait for given ms
+// Utility function to wait
 function wait(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-// Async function to handle delay and show message
+// Async function to show message after delay
 async function showMessage() {
   const message = textInput.value.trim();
   const delay = parseInt(delayInput.value);
 
   // Validation
-  if (!message) {
-    outputDiv.textContent = "⚠️ Please enter a message.";
-    return;
-  }
-  if (isNaN(delay) || delay < 0) {
-    outputDiv.textContent = "⚠️ Please enter a valid delay in milliseconds.";
+  if (!message || isNaN(delay) || delay < 0) {
     return;
   }
 
-  // Clear output while waiting
-  outputDiv.textContent = "⏳ Waiting...";
-
-  // Wait for given time
+  // Wait for the given delay
   await wait(delay);
 
-  // Show the message after delay
+  // Display the message AFTER the delay
   outputDiv.textContent = message;
 }
 
-// Event listener for button
+// Attach event
 submitBtn.addEventListener("click", showMessage);
